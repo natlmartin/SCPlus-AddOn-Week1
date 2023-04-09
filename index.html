@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data-1970-2030.min.js"></script>
     <style>
       * {
         font-family: "Verdana";
@@ -20,7 +21,7 @@
   </head>
   <body>
     <!-- Add select element with countries (Paris, Tokyo, Sydney)-->
-    <label for="citiess">Please select a city: </label>
+    <label for="cities">Please select a city: </label>
     <select id="cities">
       <option value="">Select a city</option>
       <option value="Paris">🇫🇷 Paris</option>
@@ -29,7 +30,30 @@
     </select>
     <script>
       // Get current date & time of current city
+      let currentTime = moment()
+        .tz("London")
+        .format("dddd MMMM Do YYYY h:mm a");
+
+      // Store user city to variable
+      let userCity = document.querySelector("#cities").value;
+
+      // Show selected city to user
+      function showDateTime(event) {
+        if (event.target.value > 0) {
+          if (event.target.value === "Paris") {
+            alert(`Paris`);
+          } else if (event.target.value === "Tokyo") {
+            alert(`Tokyo`);
+          } else {
+            alert(`Sydney`);
+          }
+        }
+      }
+
       // When user selects city, create alert
+      let selectedCity = document.querySelector("#cities");
+      selectedCity.addEventListener("change", showDateTime);
+
       // It is Saturday, October 8, 2023 2:51 PM in Europe/Paris
     </script>
   </body>
